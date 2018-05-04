@@ -1,6 +1,7 @@
 package com.cake.controller;
 
 import com.cake.entity.User;
+import com.cake.service.SensorInfoService;
 import com.cake.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
 
     @ResponseBody
     @RequestMapping("/hello")

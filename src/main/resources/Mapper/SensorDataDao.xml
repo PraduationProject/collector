@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//Mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cake.dao.SensorDataDao">
+    <insert id="saveSensorData" parameterType="com.cake.entity.SensorData">
+        insert into sensor_data(sensor_id,type,value,create_time,modify_time,status)
+        VALUES(#{sensor_id},#{type},#{value},#{create_time},#{modify_time},#{status})
+    </insert>
+</mapper>

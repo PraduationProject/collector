@@ -1,6 +1,7 @@
 package com.cake.service.impl;
 
 import com.cake.BaseTest;
+import com.cake.entity.User;
 import com.cake.service.UserService;
 import org.junit.Test;
 import javax.annotation.Resource;
