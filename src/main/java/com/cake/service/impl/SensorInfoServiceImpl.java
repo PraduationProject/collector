@@ -1,9 +1,7 @@
 package com.cake.service.impl;
 
 import com.cake.dao.SensorInfoDao;
-import com.cake.dao.UserDao;
 import com.cake.entity.SensorInfo;
-import com.cake.entity.User;
 import com.cake.service.SensorInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
