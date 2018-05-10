@@ -23,7 +23,7 @@ import java.util.Map;
 
 //[
 //    {
-//        "sensorID":"sensor1",
+//        "sensorName":"sensor1",
 //        "dataMap": {
 //        "re": 1,
 //        "sl": 1
@@ -49,7 +49,7 @@ public class SensorDataServiceImpl implements SensorDataService {
         List<SensorDataTemp> tempArry = JSON.parseArray(data, SensorDataTemp.class);
         for (SensorDataTemp d : tempArry) {
             for (Map.Entry<String, String> e : d.dataMap.entrySet()) {
-                SensorData temp = new SensorData(d.sensorID, e.getKey(), new Double(e.getValue()));
+                SensorData temp = new SensorData(d.sensorName, e.getKey(), new Double(e.getValue()));
                 insertCount *= sensorDataDao.saveSensorData(temp);
             }
         }

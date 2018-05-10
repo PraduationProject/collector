@@ -5,8 +5,8 @@
 
 <mapper namespace="com.cake.dao.SensorInfoDao">
 
-    <select id="loadAllAddr" resultType="java.lang.String">
-        SELECT sensor_addr FROM sensor_info
+    <select id="loadAllAddr" resultType="com.cake.dto.SensorAddrTemp">
+        SELECT sensor_name,sensor_addr FROM sensor_info
     </select>
 
     <select id="loadAllInfo" resultType="com.cake.entity.SensorInfo">

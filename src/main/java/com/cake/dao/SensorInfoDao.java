@@ -1,5 +1,6 @@
 package com.cake.dao;
 
+import com.cake.dto.SensorAddrTemp;
 import com.cake.entity.SensorInfo;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 
 public interface SensorInfoDao {
-    public List<String> loadAllAddr() throws Exception;
+    public List<SensorAddrTemp> loadAllAddr() throws Exception;
 
     public List<SensorInfo> loadAllInfo() throws Exception;
 }

@@ -1,5 +1,7 @@
 package com.cake.dto;
 
+import lombok.Data;
+
 import java.util.Map;
 
 /**
@@ -9,14 +11,16 @@ import java.util.Map;
  * Time:23:52
  * Email:971661949@qq.com
  */
+
+@Data
 public class SensorDataTemp {
-    public String sensorID;
+    public String sensorName;
     public Map<String, String> dataMap;
 
     @Override
     public String toString() {
         return "SensorDataTemp{" +
-                "sensorID='" + sensorID + '\'' +
+                "sensorName='" + sensorName + '\'' +
                 ", dataMap=" + dataMap +
                 '}';
     }

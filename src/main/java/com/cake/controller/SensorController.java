@@ -1,5 +1,7 @@
 package com.cake.controller;
 
+import com.alibaba.fastjson.util.IOUtils;
+import com.cake.dto.SensorAddrTemp;
 import com.cake.entity.SensorInfo;
 import com.cake.service.SensorDataService;
 import com.cake.service.SensorInfoService;
@@ -10,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -33,7 +39,7 @@ public class SensorController {
 
     @ResponseBody
     @RequestMapping("loadAllAddr")
-    public List<String> loadAllSensorAddr() throws Exception {
+    public List<SensorAddrTemp> loadAllSensorAddr() throws Exception {
         return sensorInfoService.loadAllAddr();
     }
 
@@ -45,10 +51,35 @@ public class SensorController {
 
     @ResponseBody
     @RequestMapping(value = "/saveData", method = RequestMethod.POST)
-    public String RequestIn(@RequestParam(value = "data", required = true, defaultValue = "") String data) throws Exception {
-        if (sensorDataService.saveData(data) > 0) {
+    public String RequestIn(HttpServletRequest request) throws Exception {
+        BufferedReader br = request.getReader();
+        String body = "", str;
+        while ((str = br.readLine()) != null) {
+            body += str;
+        }
+
+        if (sensorDataService.saveData(body) > 0) {
             return "succeed";
         }
+
+        System.out.println(body);
         return "failed";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/test")
+    public String test(HttpServletRequest request) throws Exception {
+        BufferedReader br = request.getReader();
+
+        String str, body = "body:", head = "head:";
+
+        Enumeration<String> heads = request.getHeaderNames();
+        while (heads.hasMoreElements()) {
+            str = heads.nextElement();
+            head += " " + str + " = " + request.getHeader(str);
+        }
+
+
+        return head + "\n" + body;
     }
 }

@@ -1,5 +1,6 @@
 package com.cake.service;
 
+import com.cake.dto.SensorAddrTemp;
 import com.cake.entity.SensorInfo;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Email:971661949@qq.com
  */
 public interface SensorInfoService {
-    public List<String> loadAllAddr() throws Exception;
+    public List<SensorAddrTemp> loadAllAddr() throws Exception;
 
     public List<SensorInfo> loadAllInfo() throws Exception;
 }

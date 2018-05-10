@@ -5,7 +5,7 @@
 
 <mapper namespace="com.cake.dao.SensorDataDao">
     <insert id="saveSensorData" parameterType="com.cake.entity.SensorData">
-        insert into sensor_data(sensor_id,type,value,create_time,modify_time,status)
-        VALUES(#{sensor_id},#{type},#{value},#{create_time},#{modify_time},#{status})
+        insert into sensor_data(sensor_name,type,value,create_time,modify_time,status)
+        VALUES(#{sensor_name},#{type},#{value},#{create_time},#{modify_time},#{status})
     </insert>
 </mapper>

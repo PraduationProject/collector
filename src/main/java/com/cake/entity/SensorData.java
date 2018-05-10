@@ -8,8 +8,7 @@ import java.util.Date;
 
 @Data
 public class SensorData {
-    private int id;
-    private String sensor_id;
+    private String sensor_name;
     private String type;
     private Double value;
     private java.sql.Timestamp create_time;
@@ -19,8 +18,8 @@ public class SensorData {
     public SensorData() {
     }
 
-    public SensorData(String sensor_id, String type, Double value) {
-        this.sensor_id = sensor_id;
+    public SensorData(String sensor_name, String type, Double value) {
+        this.sensor_name = sensor_name;
         this.type = type;
         this.value = value;
         this.create_time = new Timestamp(System.currentTimeMillis());

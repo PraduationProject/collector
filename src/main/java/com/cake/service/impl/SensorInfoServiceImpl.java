@@ -1,6 +1,7 @@
 package com.cake.service.impl;
 
 import com.cake.dao.SensorInfoDao;
+import com.cake.dto.SensorAddrTemp;
 import com.cake.entity.SensorInfo;
 import com.cake.service.SensorInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class SensorInfoServiceImpl implements SensorInfoService {
     private SensorInfoDao sensorInfoDao;
 
     @Transactional
-    public List<String> loadAllAddr() throws Exception {
+    public List<SensorAddrTemp> loadAllAddr() throws Exception {
         return sensorInfoDao.loadAllAddr();
     }
 
