@@ -51,7 +51,7 @@ public class SensorController {
 
     @ResponseBody
     @RequestMapping(value = "/saveData", method = RequestMethod.POST)
-    public String RequestIn(HttpServletRequest request) throws Exception {
+    public String saveData(HttpServletRequest request) throws Exception {
         BufferedReader br = request.getReader();
         String body = "", str;
         while ((str = br.readLine()) != null) {
@@ -66,20 +66,5 @@ public class SensorController {
         return "failed";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/test")
-    public String test(HttpServletRequest request) throws Exception {
-        BufferedReader br = request.getReader();
 
-        String str, body = "body:", head = "head:";
-
-        Enumeration<String> heads = request.getHeaderNames();
-        while (heads.hasMoreElements()) {
-            str = heads.nextElement();
-            head += " " + str + " = " + request.getHeader(str);
-        }
-
-
-        return head + "\n" + body;
-    }
 }
