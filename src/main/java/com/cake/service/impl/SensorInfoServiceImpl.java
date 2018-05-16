@@ -34,4 +34,8 @@ public class SensorInfoServiceImpl implements SensorInfoService {
         return sensorInfoDao.loadAllInfo();
     }
 
+    public void updatePhone(String sensorName, String phone) throws Exception {
+        sensorInfoDao.updatePhone(sensorName, phone);
+    }
+
 }
