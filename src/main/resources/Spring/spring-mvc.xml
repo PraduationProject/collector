@@ -13,7 +13,7 @@
     <mvc:annotation-driven/>
 
     <!--静态资源放行-->
-    <!--<mvc:resources location="/WEB-INF/images/" mapping="/images/**"/>-->
+    <mvc:resources location="/WEB-INF/image/" mapping="/image/**"/>
     <!--<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>-->
     <!--<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>-->
 
@@ -46,6 +46,9 @@
 
     <!--设置首页-->
     <mvc:view-controller path="/" view-name="index"/>
+    <mvc:view-controller path="/BH1750" view-name="BH1750"/>
+    <mvc:view-controller path="/BMP180" view-name="BMP180"/>
+    <mvc:view-controller path="/DHT11" view-name="DHT11"/>
 
     <!--配置扫描包-->
     <context:component-scan base-package="com.cake.controller"/>
