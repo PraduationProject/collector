@@ -13,4 +13,9 @@
         SELECT * FROM sensor_info
     </select>
 
+    <update id="updatePhone" parameterType="java.lang.String">
+        UPDATE sensor_info
+        SET phone = #{1}
+        WHERE sensor_name = #{0}
+    </update>
 </mapper>

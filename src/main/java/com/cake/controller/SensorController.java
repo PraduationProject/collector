@@ -2,9 +2,14 @@ package com.cake.controller;
 
 import com.alibaba.fastjson.util.IOUtils;
 import com.cake.dto.SensorAddrTemp;
+import com.cake.dto.SensorBH1750Temp;
+import com.cake.dto.SensorBMP180Temp;
+import com.cake.dto.SensorDHT11Temp;
 import com.cake.entity.SensorInfo;
+import com.cake.service.SensorAlarmService;
 import com.cake.service.SensorDataService;
 import com.cake.service.SensorInfoService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +42,9 @@ public class SensorController {
     @Autowired
     private SensorDataService sensorDataService;
 
+    @Autowired
+    private SensorAlarmService sensorAlarmService;
+
     @ResponseBody
     @RequestMapping("loadAllAddr")
     public List<SensorAddrTemp> loadAllSensorAddr() throws Exception {
@@ -66,5 +74,24 @@ public class SensorController {
         return "failed";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/DHT11", method = RequestMethod.POST)
+    public void updateDHT11(SensorDHT11Temp sd) throws Exception {
+        sensorInfoService.updatePhone(sd.NAME, sd.getPhone());
+        sensorAlarmService.insertDHT11(sd);
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/BMP180", method = RequestMethod.POST)
+    public void updateBMP180(SensorBMP180Temp sb) throws Exception {
+        sensorInfoService.updatePhone(sb.NAME, sb.getPhone());
+        sensorAlarmService.insertBMP180(sb);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "BH1750", method = RequestMethod.POST)
+    public void updateBH1750(SensorBH1750Temp sb) throws Exception {
+        sensorInfoService.updatePhone(sb.NAME, sb.getPhone());
+        sensorAlarmService.insertBH1750(sb);
+    }
 }
