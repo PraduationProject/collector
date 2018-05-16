@@ -11,6 +11,7 @@ public class SensorData {
     private String sensor_name;
     private String type;
     private Double value;
+    private long timestamp;
     private java.sql.Timestamp create_time;
     private java.sql.Timestamp modify_time;
     private int status;
@@ -22,7 +23,8 @@ public class SensorData {
         this.sensor_name = sensor_name;
         this.type = type;
         this.value = value;
-        this.create_time = new Timestamp(System.currentTimeMillis());
+        this.timestamp = System.currentTimeMillis();
+        this.create_time = new Timestamp(this.timestamp);
         this.modify_time = create_time;
         this.status = 1;
     }
