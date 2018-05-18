@@ -40,7 +40,9 @@ public class SensorInfoServiceImpl implements SensorInfoService {
     }
 
     public void updatePhone(String sensorName, String phone) throws Exception {
+        ShardedJedis jedis = jedisPool.getResource();
         sensorInfoDao.updatePhone(sensorName, phone);
+        jedis.set(sensorName + "_phone", phone);
     }
 
     public String loadPhone(String sensorName) throws Exception {

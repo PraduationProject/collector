@@ -30,16 +30,22 @@ public class SensorAlarmServiceImpl implements SensorAlarmService {
     public void insertDHT11(SensorDHT11Temp sd) throws Exception {
         sensorAlarmDao.insertSensor(new SensorAlarm(sd.NAME, sd.TE, sd.getTeUp(), sd.getTeDown(), sd.getStatus()));
         sensorAlarmDao.insertSensor(new SensorAlarm(sd.NAME, sd.HU, sd.getHuUp(), sd.getHuDown(), sd.getStatus()));
+        ShardedJedis jedis = jedisPool.getResource();
+        jedis.del("alarm");
     }
 
     public void insertBMP180(SensorBMP180Temp sb) throws Exception {
         sensorAlarmDao.insertSensor(new SensorAlarm(sb.NAME, sb.PR, sb.getPrUp(), sb.getPrDown(), sb.getStatus()));
         sensorAlarmDao.insertSensor(new SensorAlarm(sb.NAME, sb.TE, sb.getTeUp(), sb.getTeDown(), sb.getStatus()));
         sensorAlarmDao.insertSensor(new SensorAlarm(sb.NAME, sb.HI, sb.getHiUp(), sb.getHiDown(), sb.getStatus()));
+        ShardedJedis jedis = jedisPool.getResource();
+        jedis.del("alarm");
     }
 
     public void insertBH1750(SensorBH1750Temp sb) throws Exception {
         sensorAlarmDao.insertSensor(new SensorAlarm(sb.NAME, sb.LI, sb.getLiUp(), sb.getLiDown(), sb.getStatus()));
+        ShardedJedis jedis = jedisPool.getResource();
+        jedis.del("alarm");
     }
 
     public List<SensorAlarm> loadAllAlarm() throws Exception {
