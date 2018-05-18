@@ -32,6 +32,7 @@ public class SensorAlarmServiceImpl implements SensorAlarmService {
         sensorAlarmDao.insertSensor(new SensorAlarm(sd.NAME, sd.HU, sd.getHuUp(), sd.getHuDown(), sd.getStatus()));
         ShardedJedis jedis = jedisPool.getResource();
         jedis.del("alarm");
+        jedis.close();
     }
 
     public void insertBMP180(SensorBMP180Temp sb) throws Exception {
@@ -40,12 +41,14 @@ public class SensorAlarmServiceImpl implements SensorAlarmService {
         sensorAlarmDao.insertSensor(new SensorAlarm(sb.NAME, sb.HI, sb.getHiUp(), sb.getHiDown(), sb.getStatus()));
         ShardedJedis jedis = jedisPool.getResource();
         jedis.del("alarm");
+        jedis.close();
     }
 
     public void insertBH1750(SensorBH1750Temp sb) throws Exception {
         sensorAlarmDao.insertSensor(new SensorAlarm(sb.NAME, sb.LI, sb.getLiUp(), sb.getLiDown(), sb.getStatus()));
         ShardedJedis jedis = jedisPool.getResource();
         jedis.del("alarm");
+        jedis.close();
     }
 
     public List<SensorAlarm> loadAllAlarm() throws Exception {
@@ -60,7 +63,7 @@ public class SensorAlarmServiceImpl implements SensorAlarmService {
             System.out.println(listJson);
             jedis.set("alarm", listJson);
         }
-
+        jedis.close();
         return alarmList;
     }
 }

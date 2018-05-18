@@ -91,7 +91,7 @@ public class SensorDataServiceImpl implements SensorDataService {
             }
 
         }
-
+        jedis.close();
         return insertCount;
     }
 }

@@ -43,6 +43,7 @@ public class SensorInfoServiceImpl implements SensorInfoService {
         ShardedJedis jedis = jedisPool.getResource();
         sensorInfoDao.updatePhone(sensorName, phone);
         jedis.set(sensorName + "_phone", phone);
+        jedis.close();
     }
 
     public String loadPhone(String sensorName) throws Exception {
@@ -53,6 +54,7 @@ public class SensorInfoServiceImpl implements SensorInfoService {
             phone = sensorInfoDao.loadPhone(sensorName);
             jedis.set(sensorName + "_phone", phone);
         }
+        jedis.close();
         return phone;
     }
 
