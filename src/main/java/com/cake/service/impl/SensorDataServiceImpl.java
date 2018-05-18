@@ -77,20 +77,23 @@ public class SensorDataServiceImpl implements SensorDataService {
             }
         }
 
-        for (SensorAlarm s : alarmList) {
-            double value = dataMap.get(s.getSensor_name() + s.getType()).getValue();
-            if (value > s.getDown() && value < s.getUp()) {
-                continue;
-            }
-            String phone = sensorInfoService.loadPhone(s.getSensor_name());
-            String lock = jedis.get("already_" + s.getSensor_name() + "_" + s.getType() + "_" + phone);
-            if (lock == null) {
-                SmsUtil.SendMessage(phone, s.getSensor_name(), s.getType());
-                jedis.set("already_" + phone, "lock");
-                jedis.expire("already_" + phone, 60);
-            }
+        if (alarmList != null && alarmList.size() != 0) {
+            for (SensorAlarm s : alarmList) {
+                double value = dataMap.get(s.getSensor_name() + s.getType()).getValue();
+                if (value > s.getDown() && value < s.getUp()) {
+                    continue;
+                }
+                String phone = sensorInfoService.loadPhone(s.getSensor_name());
+                String lock = jedis.get("already_" + s.getSensor_name() + "_" + s.getType() + "_" + phone);
+                if (lock == null) {
+                    SmsUtil.SendMessage(phone, s.getSensor_name(), s.getType());
+                    jedis.set("already_" + phone, "lock");
+                    jedis.expire("already_" + phone, 60);
+                }
 
+            }
         }
+
         jedis.close();
         return insertCount;
     }
