@@ -83,11 +83,11 @@ public class SensorDataServiceImpl implements SensorDataService {
                 continue;
             }
             String phone = sensorInfoService.loadPhone(s.getSensor_name());
-            String lock = jedis.get("already_" + phone);
+            String lock = jedis.get("already_" + s.getSensor_name() + "_" + s.getType() + "_" + phone);
             if (lock == null) {
                 SmsUtil.SendMessage(phone, s.getSensor_name(), s.getType());
                 jedis.set("already_" + phone, "lock");
-                jedis.expire("already_" + phone, 50);
+                jedis.expire("already_" + phone, 60);
             }
 
         }
