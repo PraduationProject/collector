@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Map;
 
 /**
@@ -26,12 +27,12 @@ public class HttpUtil {
                 sb.append(e.getValue());
                 sb.append("&");
             }
-            sb.substring(0, sb.length() - 1);
-        }
-        System.out.println("send_url:" + sb.toString());
 
+        }
+
+        System.out.println(sb.substring(0, sb.length() - 1));
         try {
-            URL u = new URL(sb.toString());
+            URL u = new URL(sb.substring(0, sb.length() - 1));
             con = (HttpURLConnection) u.openConnection();
             con.setRequestMethod("GET");
             con.setDoOutput(true);

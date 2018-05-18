@@ -21,4 +21,8 @@
                 #{modify_time},
                 #{status})
     </insert>
+
+    <select id="loadAllAlarm" resultType="com.cake.entity.SensorAlarm">
+        SELECT * FROM sensor_alarm
+    </select>
 </mapper>

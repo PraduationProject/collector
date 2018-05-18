@@ -1,12 +1,16 @@
 package com.cake.entity;
 
+import lombok.Data;
+
 import java.sql.Timestamp;
 
 /**
  * Created by xiaoyiyun on 2018/5/16.
  */
+
 public class SensorAlarm {
 
+    private int id;
     private String sensor_name;
     private String type;
     private float up;
@@ -14,6 +18,10 @@ public class SensorAlarm {
     private java.sql.Timestamp create_time;
     private java.sql.Timestamp modify_time;
     private int status;
+
+
+    public SensorAlarm() {
+    }
 
     public SensorAlarm(String sensorName, String type, float up, float down, int status) {
         this.sensor_name = sensorName;
@@ -23,6 +31,14 @@ public class SensorAlarm {
         this.create_time = new Timestamp(System.currentTimeMillis());
         this.modify_time = create_time;
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSensor_name() {
@@ -84,7 +100,8 @@ public class SensorAlarm {
     @Override
     public String toString() {
         return "SensorAlarm{" +
-                "sensor_name='" + sensor_name + '\'' +
+                "id=" + id +
+                ", sensor_name='" + sensor_name + '\'' +
                 ", type='" + type + '\'' +
                 ", up=" + up +
                 ", down=" + down +

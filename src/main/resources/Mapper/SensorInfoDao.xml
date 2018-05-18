@@ -18,4 +18,8 @@
         SET phone = #{1}
         WHERE sensor_name = #{0}
     </update>
+
+    <select id="loadPhone" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT phone FROM sensor_info where sensor_name=#{sensorName} and status=1;
+    </select>
 </mapper>

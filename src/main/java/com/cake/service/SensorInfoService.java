@@ -14,8 +14,8 @@ import java.util.List;
  */
 public interface SensorInfoService {
     public List<SensorAddrTemp> loadAllAddr() throws Exception;
-
     public List<SensorInfo> loadAllInfo() throws Exception;
-
     public void updatePhone(String sensorName, String phone) throws Exception;
+
+    public String loadPhone(String sensorName) throws Exception;
 }

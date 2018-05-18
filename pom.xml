@@ -128,6 +128,11 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <!-- 映入JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -149,6 +154,12 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.8</version>
+        </dependency>
+        <!-- redis依赖包 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
         </dependency>
         <!--其他需要的包-->
         <dependency>

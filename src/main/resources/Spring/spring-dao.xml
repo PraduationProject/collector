@@ -9,6 +9,7 @@
         <property name="location" value="classpath:db.properties"/>
     </bean>
 
+
     <!--配置外部数据源连接池-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
@@ -34,6 +35,31 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="basePackage" value="com.cake.dao"/>
+    </bean>
+
+    <!-- JEDIS SHARD 池配置 -->
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <ref bean="jedis.shardInfo.default"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- JEDIS连接池配置 -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.pool.maxActive}"/>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxWait}"/>
+        <property name="testOnBorrow" value="true"/>
+    </bean>
+
+    <!-- JEDIS SHARD信息配置[START]      在此添加REDIS集群配置 -->
+    <bean id="jedis.shardInfo.default" class="redis.clients.jedis.JedisShardInfo">
+        <constructor-arg index="0" value="${redis.host}"/>
+        <constructor-arg index="1" type="int" value="${redis.port}"/>
+        <constructor-arg index="2" type="java.lang.String" value="${redis.host}"/>
     </bean>
 
 </beans>

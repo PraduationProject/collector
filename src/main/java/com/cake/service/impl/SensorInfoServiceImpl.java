@@ -7,6 +7,9 @@ import com.cake.service.SensorInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
 
 import java.util.List;
 
@@ -23,6 +26,8 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 
     @Autowired
     private SensorInfoDao sensorInfoDao;
+    @Autowired
+    private ShardedJedisPool jedisPool;
 
     @Transactional
     public List<SensorAddrTemp> loadAllAddr() throws Exception {
@@ -36,6 +41,17 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 
     public void updatePhone(String sensorName, String phone) throws Exception {
         sensorInfoDao.updatePhone(sensorName, phone);
+    }
+
+    public String loadPhone(String sensorName) throws Exception {
+        ShardedJedis jedis = jedisPool.getResource();
+        String phone = jedis.get(sensorName + "_phone");
+        if (phone == null) {
+            System.out.println("DB");
+            phone = sensorInfoDao.loadPhone(sensorName);
+            jedis.set(sensorName + "_phone", phone);
+        }
+        return phone;
     }
 
 }
