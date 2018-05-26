@@ -79,10 +79,15 @@ public class SensorDataServiceImpl implements SensorDataService {
 
         if (alarmList != null && alarmList.size() != 0) {
             for (SensorAlarm s : alarmList) {
-                double value = dataMap.get(s.getSensor_name() + s.getType()).getValue();
-                if (value > s.getDown() && value < s.getUp()) {
-                    continue;
+
+                SensorData sensorData = dataMap.get(s.getSensor_name() + s.getType());
+                if (sensorData != null) {
+                    double value = sensorData.getValue();
+                    if (value > s.getDown() && value < s.getUp()) {
+                        continue;
+                    }
                 }
+
                 String phone = sensorInfoService.loadPhone(s.getSensor_name());
                 String lock = jedis.get("already_" + s.getSensor_name() + "_" + s.getType() + "_" + phone);
                 if (lock == null) {
@@ -90,7 +95,6 @@ public class SensorDataServiceImpl implements SensorDataService {
                     jedis.set("already_" + phone, "lock");
                     jedis.expire("already_" + phone, 60);
                 }
-
             }
         }
 
